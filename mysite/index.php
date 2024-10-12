@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Hello, World!</h1>
-    <p>Welcome to my PHP project deployed with Jenkins CI/CD pipeline.</p>
+    <p>Welcome to my PHP project deployed with Jenkins Freestyle CI/CD pipeline.</p>
 </body>
 </html>
 
