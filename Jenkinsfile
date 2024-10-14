@@ -11,7 +11,7 @@ pipeline {
                 script {
                     // Replace with your actual paths and user details
                     def remoteUser = 'ec2-user'
-                    def remoteHost = '34.207.124.135'
+                    def remoteHost = '54.174.151.2'
                     def sshKey = '/home/nabeel/ec2-user.pem'
                     
                     // SSH and SCP Commands
