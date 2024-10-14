@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sshagent(['ssh-ec2-key']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ec2-user@54.174.151.2 'mkdir -p /home/nabeel/ec2-project/resbee-ec2/mysite'
+                    ssh -o StrictHostKeyChecking=no ec2-user@54.174.151.2 'sudo mkdir -p /home/nabeel/ec2-project/resbee-ec2/mysite'
                     scp -o StrictHostKeyChecking=no index.php ec2-user@54.174.151.2:/home/nabeel/ec2-project/resbee-ec2/mysite/
                     ssh -o StrictHostKeyChecking=no ec2-user@54.174.151.2 'sudo systemctl restart nginx'
                     """
