@@ -8,21 +8,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
-                    // Replace with your actual paths and user details
-                    def remoteUser = 'ec2-user'
-                    def remoteHost = '54.174.151.2'
-                    def sshKey = '/home/nabeel/ec2-user.pem'
-                    
-                    // SSH and SCP Commands
+                sshagent(['ssh-ec2-key']) {
                     sh """
-                    ssh -i ${sshKey} -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'mkdir -p /home/nabeel/ec2-project/resbee-ec2/mysite'
-                    scp -i ${sshKey} -o StrictHostKeyChecking=no index.php ${remoteUser}@${remoteHost}:/home/nabeel/ec2-project/resbee-ec2/mysite/
-                    """
-                    
-                    // Restart Nginx on the EC2 instance to apply changes
-                    sh """
-                    ssh -i ${sshKey} -o StrictHostKeyChecking=no ${remoteUser}@${remoteHost} 'sudo systemctl restart nginx'
+                    ssh -o StrictHostKeyChecking=no ec2-user@54.174.151.2 'mkdir -p /home/nabeel/ec2-project/resbee-ec2/mysite'
+                    scp -o StrictHostKeyChecking=no index.php ec2-user@54.174.151.2:/home/nabeel/ec2-project/resbee-ec2/mysite/
+                    sudo systemctl restart nginx
                     """
                 }
             }
@@ -37,3 +27,4 @@ pipeline {
         }
     }
 }
+
