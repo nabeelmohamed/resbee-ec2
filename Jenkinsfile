@@ -3,9 +3,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                script {
+                    echo "Checking out branch: ${env.BRANCH_NAME}"
+                }
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '${env.BRANCH_NAME}']],
+                    branches: [[name: 'refs/heads/' + env.BRANCH_NAME]],
                     userRemoteConfigs: [[url: 'https://github.com/nabeelmohamed/resbee-ec2.git', credentialsId: '1f5d1ce7-6d17-4259-a348-b2bcc947a292']]
                 ])
             }
